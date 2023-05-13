@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pers.chris</groupId>
-    <artifactId>Modular-Computing</artifactId>
+    <artifactId>Streaming-Computing</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -47,6 +47,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.15</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,10 @@
 package pers.chris.base;
 
 
+import pers.chris.base.job.JobDefinition;
+import pers.chris.base.job.JobManager;
+import pers.chris.base.reader.FileReader;
+
 /**
  * @Description
  * @Author Chris
@@ -12,15 +16,15 @@ public class JobDriver {
         // TODO Stream
         JobManager jobManager = JobManager.getInstance();
 
-        Job job = new Job();
-        job.setOriginalData("Hello World");
-        job.setTask(Task1.class, Task2.class);
-        job.submit();
+        JobDefinition jobDefinition1 = new JobDefinition();
+        jobDefinition1.setReader(new FileReader("data/input1.txt"));
+        jobDefinition1.setTask(Task1Definition.class, Task2Definition.class);
+        jobDefinition1.submit();
 
-        Job job1 = new Job();
-        job1.setOriginalData("Good");
-        job1.setTask(Task1.class, Task2.class);
-        job1.submit();
+        JobDefinition jobDefinition2 = new JobDefinition();
+        jobDefinition2.setReader(new FileReader("data/input2.txt"));
+        jobDefinition2.setTask(Task1Definition.class, Task2Definition.class);
+        jobDefinition2.submit();
 
         jobManager.run();
 

@@ -1,11 +1,13 @@
 package pers.chris.base;
 
+import pers.chris.base.task.BaseTaskDefinition;
+
 /**
  * @Description
  * @Author Chris
  * @Date 2023/5/10
  */
-public class Task2 extends BaseTask<Integer, Integer> {
+public class Task2Definition extends BaseTaskDefinition<Integer, Integer> {
 
     @Override
     public Integer execute(Integer input) {

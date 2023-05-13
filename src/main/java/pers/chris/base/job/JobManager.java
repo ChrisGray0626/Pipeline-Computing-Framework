@@ -1,4 +1,4 @@
-package pers.chris.base;
+package pers.chris.base.job;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +15,7 @@ public class JobManager {
 
     private static final int MAX_JOB_NUM = 3;
     private static JobManager instance;
-    private final Map<String, Job> jobs;
+    private final Map<String, JobDefinition> jobs;
 
     private JobManager() {
         jobs = new ConcurrentHashMap<>();
@@ -28,20 +28,20 @@ public class JobManager {
         return instance;
     }
 
-    public void addJob(Job... jobs) {
-        for (Job job : jobs) {
+    public void addJob(JobDefinition... jobDefinitions) {
+        for (JobDefinition jobDefinition : jobDefinitions) {
             if (this.jobs.size() > MAX_JOB_NUM) {
                 throw new RuntimeException("Jobs are full");
             }
-            this.jobs.put(job.getId(), job);
+            this.jobs.put(jobDefinition.getId(), jobDefinition);
         }
 
     }
 
     public void run() throws InterruptedException {
         ExecutorService threadPool = Executors.newFixedThreadPool(MAX_JOB_NUM);
-        for (Job job : jobs.values()) {
-            threadPool.execute(new JobThread(job));
+        for (JobDefinition jobDefinition : jobs.values()) {
+            threadPool.execute(new JobInstance(jobDefinition));
         }
 
         threadPool.shutdown();

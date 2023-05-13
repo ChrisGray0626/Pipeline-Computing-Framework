@@ -1,22 +1,25 @@
-package pers.chris.base;
+package pers.chris.base.job;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lombok.Getter;
+import pers.chris.base.reader.BaseReader;
 
 /**
  * @Description
  * @Author Chris
  * @Date 2023/5/10
  */
-public class Job {
+@Getter
+public class JobDefinition {
 
     private final List<String> taskClassNames;
+    private BaseReader reader;
     private String id;
     private String name;
-    private Object originalData;
 
-    public Job() {
+    public JobDefinition() {
         taskClassNames = new ArrayList<>();
     }
 
@@ -26,24 +29,12 @@ public class Job {
         }
     }
 
+    public void setReader(BaseReader reader) {
+        this.reader = reader;
+    }
+
     public void submit() {
         id = UUID.randomUUID().toString();
         JobManager.getInstance().addJob(this);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public List<String> getTaskClasses() {
-        return taskClassNames;
-    }
-
-    public Object getOriginalData() {
-        return originalData;
-    }
-
-    public void setOriginalData(Object originalData) {
-        this.originalData = originalData;
     }
 }

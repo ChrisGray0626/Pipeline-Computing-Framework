@@ -14,14 +14,20 @@ public class Configuration {
     public static final class Constant {
         public static final String READER_TYPE = "READER_TYPE";
         public static final String WRITER_TYPE = "WRITER_TYPE";
+        public static final String TASK_TYPE = "TASK_TYPE";
         public static final String INPUT_PATH = "INPUT_PATH";
         public static final String OUTPUT_PATH = "OUTPUT_PATH";
         public static final class ReaderType {
-            public static final String FILE_READER = "FILE_READER";
+            public static final String FILE = "FILE";
         }
         public static final class WriterType {
-            public static final String CONSOLE_WRITER = "CONSOLE_WRITER";
-            public static final String FILE_WRITER = "FILE_WRITER";
+            public static final String CONSOLE = "CONSOLE";
+            public static final String FILE = "FILE";
+        }
+
+        public static final class TaskType {
+            public static final String SINGLE = "SINGLE";
+            public static final String PARALLEL = "PARALLEL";
         }
     }
 

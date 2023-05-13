@@ -10,7 +10,8 @@ import pers.chris.base.Configuration;
 public class ConsoleWriter extends BaseWriter{
 
     public ConsoleWriter() {
-        configuration.set(Configuration.Constant.WRITER_TYPE, Configuration.Constant.WriterType.CONSOLE_WRITER);
+        super();
+        configuration.set(Configuration.Constant.WRITER_TYPE, Configuration.Constant.WriterType.CONSOLE);
     }
     @Override
     public void write(Object data) {

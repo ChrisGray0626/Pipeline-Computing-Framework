@@ -14,11 +14,16 @@ public abstract class BaseTaskDefinition<Input, Output> {
     protected String taskId;
     protected JobDefinition jobDefinition;
     protected Configuration configuration;
+    private static final String DEFAULT_TASK_TYPE = Configuration.Constant.TaskType.SINGLE;
 
     protected BaseTaskDefinition() {
         configuration = Configuration.getInstance();
+        this.setTaskType(DEFAULT_TASK_TYPE);
     }
 
     public abstract Output execute(Input input);
 
+    protected void setTaskType(String taskType) {
+        configuration.set(Configuration.Constant.TASK_TYPE, taskType);
+    }
 }

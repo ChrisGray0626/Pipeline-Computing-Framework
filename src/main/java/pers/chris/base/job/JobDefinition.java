@@ -21,14 +21,12 @@ public class JobDefinition {
     private final List<String> taskClassNames;
     private BaseReader reader;
     private BaseWriter writer;
-    private static final BaseWriter DEFAULT_WRITER = new ConsoleWriter();
 
     public JobDefinition() {
         taskClassNames = new ArrayList<>();
-        writer = DEFAULT_WRITER;
     }
 
-    public void setTask(Class<?>... taskClass) {
+    public void addTask(Class<?>... taskClass) {
         for (Class<?> task : taskClass) {
             taskClassNames.add(task.getName());
         }

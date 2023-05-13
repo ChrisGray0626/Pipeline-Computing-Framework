@@ -19,6 +19,10 @@ public class Configuration {
         public static final class ReaderType {
             public static final String FILE_READER = "FILE_READER";
         }
+        public static final class WriterType {
+            public static final String CONSOLE_WRITER = "CONSOLE_WRITER";
+            public static final String FILE_WRITER = "FILE_WRITER";
+        }
     }
 
     public static Configuration getInstance() {

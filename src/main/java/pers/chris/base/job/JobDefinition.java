@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
 import pers.chris.base.reader.BaseReader;
+import pers.chris.base.writer.BaseWriter;
+import pers.chris.base.writer.ConsoleWriter;
 
 /**
  * @Description
@@ -14,13 +16,16 @@ import pers.chris.base.reader.BaseReader;
 @Getter
 public class JobDefinition {
 
-    private final List<String> taskClassNames;
-    private BaseReader reader;
     private String id;
     private String name;
+    private final List<String> taskClassNames;
+    private BaseReader reader;
+    private BaseWriter writer;
+    private static final BaseWriter DEFAULT_WRITER = new ConsoleWriter();
 
     public JobDefinition() {
         taskClassNames = new ArrayList<>();
+        writer = DEFAULT_WRITER;
     }
 
     public void setTask(Class<?>... taskClass) {
@@ -29,12 +34,16 @@ public class JobDefinition {
         }
     }
 
+    public void submit() {
+        id = UUID.randomUUID().toString();
+        JobManager.getInstance().addJob(this);
+    }
+
     public void setReader(BaseReader reader) {
         this.reader = reader;
     }
 
-    public void submit() {
-        id = UUID.randomUUID().toString();
-        JobManager.getInstance().addJob(this);
+    public void setWriter(BaseWriter writer) {
+        this.writer = writer;
     }
 }

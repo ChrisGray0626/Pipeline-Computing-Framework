@@ -1,20 +1,19 @@
-package pers.chris.base.reader;
+package pers.chris.base.writer;
 
 import pers.chris.base.Configuration;
 
 /**
  * @Description
  * @Author Chris
- * @Date 2023/5/10
+ * @Date 2023/5/13
  */
-public abstract class BaseReader {
+public abstract class BaseWriter {
 
     protected Configuration configuration;
 
-    protected BaseReader() {
+    protected BaseWriter() {
         configuration = Configuration.getInstance();
     }
 
-    public abstract Object read();
-
+    public abstract void write(Object data);
 }

@@ -25,13 +25,11 @@ public class JobInstance extends Thread {
                 Class<? extends BaseTaskDefinition> clazz = (Class<? extends BaseTaskDefinition>) Class.forName(taskClassName);
                 BaseTaskDefinition task = clazz.newInstance();
                 context = task.execute(context);
-                System.out.println(context);
             }
-            // TODO Write
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            this.interrupt();
         }
+        jobDefinition.getWriter().write(context);
+        this.interrupt();
     }
 }

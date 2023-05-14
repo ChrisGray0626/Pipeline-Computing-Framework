@@ -1,4 +1,4 @@
-package pers.chris.base;
+package pers.chris.base.sample;
 
 import pers.chris.base.task.BaseTaskDefinition;
 

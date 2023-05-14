@@ -1,7 +1,7 @@
 package pers.chris.base.job;
 
-import pers.chris.base.task.BaseTaskDefinition;
-import pers.chris.base.task.TaskInstance;
+import pers.chris.base.datatype.Context;
+import pers.chris.base.task.TaskManager;
 
 /**
  * @Description
@@ -10,28 +10,24 @@ import pers.chris.base.task.TaskInstance;
  */
 public class JobInstance extends Thread {
     private final JobDefinition job;
+    private final Context context;
 
     public JobInstance(JobDefinition job) {
         this.job = job;
+        this.context = new Context();
     }
 
     @Override
     public void run() {
-        Object context;
-        context = job.getReader().read();
+        // TODO Reader Writer Instance
+        context.set(job.getReader().read());
 
-        try {
-            for (String taskClassName : job.getTaskClassNames()) {
-                // TODO 泛型
-                Class<? extends BaseTaskDefinition> clazz = (Class<? extends BaseTaskDefinition>) Class.forName(taskClassName);
-                BaseTaskDefinition taskDefinition = clazz.newInstance();
-                TaskInstance task = new TaskInstance(taskDefinition, context);
-                context = task.execute();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (String taskClassName : job.getTaskClassNames()) {
+            TaskManager taskManager = new TaskManager(taskClassName, context);
+            taskManager.run();
         }
-        job.getWriter().write(context);
+
+        job.getWriter().write(context.get());
         this.interrupt();
     }
 }

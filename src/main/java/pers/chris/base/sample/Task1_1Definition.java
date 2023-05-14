@@ -1,4 +1,4 @@
-package pers.chris.base;
+package pers.chris.base.sample;
 
 import java.util.List;
 import pers.chris.base.task.BaseParallelTaskDefinition;
@@ -22,6 +22,6 @@ public class Task1_1Definition extends BaseParallelTaskDefinition<String, Intege
 
     @Override
     public Integer execute(String input) {
-        return input.length();
+        return input.split(" ").length;
     }
 }

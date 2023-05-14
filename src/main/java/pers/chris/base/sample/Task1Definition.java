@@ -1,4 +1,4 @@
-package pers.chris.base;
+package pers.chris.base.sample;
 
 import pers.chris.base.task.BaseTaskDefinition;
 
@@ -11,6 +11,7 @@ public class Task1Definition extends BaseTaskDefinition<String, Integer> {
 
     @Override
     public Integer execute(String input) {
-        return input.length();
+        input = input.replaceAll("\n", " ");
+        return input.split(" ").length;
     }
 }

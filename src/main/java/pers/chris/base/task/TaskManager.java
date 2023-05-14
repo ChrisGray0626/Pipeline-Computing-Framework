@@ -1,8 +1,13 @@
 package pers.chris.base.task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+import pers.chris.base.util.ReflectUtil;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import pers.chris.base.datatype.Context;
 
 /**
  * @Description
@@ -11,13 +16,18 @@ import java.util.List;
  */
 public class TaskManager {
 
-    private final List<String> taskClassNames;
+    private final String taskDefinitionClassName;
+    private final Context context;
 
-    public TaskManager() {
-        taskClassNames = new ArrayList<>();
+    public TaskManager(String taskDefinitionClassName, Context context) {
+        this.taskDefinitionClassName = taskDefinitionClassName;
+        this.context = context;
     }
 
-    public void addTask(String... taskClassNames) {
-        this.taskClassNames.addAll(Arrays.asList(taskClassNames));
+    @SuppressWarnings("unchecked")
+    public <Input, Output> void run() {
+        BaseTaskDefinition<Input, Output> taskDefinition = ReflectUtil.newInstance(taskDefinitionClassName);
+        BaseTaskInstance<Input, Output> taskInstance = BaseTaskInstance.getInstance(taskDefinition, context);
+        taskInstance.run();
     }
 }

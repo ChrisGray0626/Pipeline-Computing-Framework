@@ -1,4 +1,4 @@
-package pers.chris.base;
+package pers.chris.base.sample;
 
 
 import pers.chris.base.job.JobDefinition;
@@ -14,7 +14,6 @@ import pers.chris.base.writer.ConsoleWriter;
 public class JobDriver {
 
     public static void main(String[] args) throws InterruptedException {
-        // TODO Stream
         JobManager jobManager = JobManager.getInstance();
 
         JobDefinition jobDefinition1 = new JobDefinition();
@@ -24,8 +23,9 @@ public class JobDriver {
         jobDefinition1.submit();
 
         JobDefinition jobDefinition2 = new JobDefinition();
-        jobDefinition2.setReader(new FileReader("data/input2.txt"));
-        jobDefinition2.addTask(Task1Definition.class, Task2Definition.class);
+        jobDefinition2.setReader(new FileReader("data/input1.txt"));
+        jobDefinition2.addTask(Task1_1Definition.class, Task2Definition.class);
+
         jobDefinition2.setWriter(new ConsoleWriter());
         jobDefinition2.submit();
 

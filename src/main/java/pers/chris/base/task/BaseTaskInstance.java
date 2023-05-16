@@ -1,13 +1,13 @@
 package pers.chris.base.task;
 
-import pers.chris.base.datatype.Context;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
  * @Author Chris
  * @Date 2023/5/14
  */
-public abstract class BaseTaskInstance<Input, Output> extends Thread{
+public abstract class BaseTaskInstance<Input, Output> extends Thread {
 
     protected final Context context;
 

@@ -1,6 +1,7 @@
 package pers.chris.base.reader;
 
 import pers.chris.base.Configuration;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -15,6 +16,6 @@ public abstract class BaseReader {
         configuration = Configuration.getInstance();
     }
 
-    public abstract Object read();
+    public abstract void read(Context context);
 
 }

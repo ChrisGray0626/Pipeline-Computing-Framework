@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import pers.chris.base.datatype.Context;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -24,9 +24,13 @@ public class ParallelTaskInstance<Input, Output> extends BaseTaskInstance<Input,
     @SuppressWarnings("unchecked")
     @Override
     public void run() {
+        // For storing and merging the output of each split
         ConcurrentLinkedQueue<Output> outputQueue = new ConcurrentLinkedQueue<>();
+        // Get the input
         Input input = (Input) context.get();
+        // Split the input
         List<Input> splits = taskDefinition.split(input);
+        // Count the number of finished split tasks
         CountDownLatch latch = new CountDownLatch(splits.size());
         ExecutorService threadPool = Executors.newFixedThreadPool(splits.size());
         for (Input split : splits) {
@@ -36,7 +40,9 @@ public class ParallelTaskInstance<Input, Output> extends BaseTaskInstance<Input,
                 latch.countDown();
             }));
         }
+        // Wait for all split tasks to finish
         threadPool.shutdown();
+        // Merge the output of each split
         Thread mergerThread = new Thread(() -> {
             while (outputQueue.size() > 1 || latch.getCount() != 0) {
                 Output output1 = outputQueue.poll();
@@ -45,11 +51,13 @@ public class ParallelTaskInstance<Input, Output> extends BaseTaskInstance<Input,
             }
         });
         mergerThread.start();
+        // Wait for the merger to finish
         try {
             mergerThread.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        // Set the output
         context.set(outputQueue.poll());
     }
 }

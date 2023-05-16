@@ -14,22 +14,24 @@ import pers.chris.base.writer.ConsoleWriter;
 public class JobDriver {
 
     public static void main(String[] args) throws InterruptedException {
-        JobManager jobManager = JobManager.getInstance();
-
         JobDefinition jobDefinition1 = new JobDefinition();
         jobDefinition1.setReader(new FileReader("data/input1.txt"));
-        jobDefinition1.setWriter(new ConsoleWriter());
         jobDefinition1.addTask(Task1Definition.class, Task2Definition.class);
+        jobDefinition1.setWriter(new ConsoleWriter());
         jobDefinition1.submit();
 
         JobDefinition jobDefinition2 = new JobDefinition();
         jobDefinition2.setReader(new FileReader("data/input1.txt"));
         jobDefinition2.addTask(Task1_1Definition.class, Task2Definition.class);
-
         jobDefinition2.setWriter(new ConsoleWriter());
         jobDefinition2.submit();
 
-        jobManager.run();
+        JobDefinition jobDefinition3 = new JobDefinition();
+        jobDefinition3.setReader(new FileReader("data/input2.txt"));
+        jobDefinition3.addTask(Task1_1Definition.class, Task2Definition.class);
+        jobDefinition3.setWriter(new ConsoleWriter());
+        jobDefinition3.submit();
 
+        // JobManager.getInstance().shutdown();
     }
 }

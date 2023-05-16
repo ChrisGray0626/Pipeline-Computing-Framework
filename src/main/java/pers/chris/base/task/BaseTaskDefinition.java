@@ -18,7 +18,7 @@ public abstract class BaseTaskDefinition<Input, Output> {
 
     protected BaseTaskDefinition() {
         configuration = Configuration.getInstance();
-        this.setTaskType(DEFAULT_TASK_TYPE);
+        setTaskType(DEFAULT_TASK_TYPE);
     }
 
     public abstract Output execute(Input input);

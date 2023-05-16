@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
+import pers.chris.base.Configuration;
 import pers.chris.base.reader.BaseReader;
 import pers.chris.base.task.BaseTaskDefinition;
 import pers.chris.base.writer.BaseWriter;
@@ -20,7 +21,7 @@ public class JobDefinition {
     private String id;
     private String name;
     private final List<String> taskClassNames;
-    // TODO Reader Writer Definition
+    // TODO Reader and Writer
     private BaseReader reader;
     private BaseWriter writer;
 

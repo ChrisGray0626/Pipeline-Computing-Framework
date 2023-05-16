@@ -1,6 +1,7 @@
 package pers.chris.base.writer;
 
 import pers.chris.base.Configuration;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -15,5 +16,5 @@ public abstract class BaseWriter {
         configuration = Configuration.getInstance();
     }
 
-    public abstract void write(Object data);
+    public abstract void write(Context context);
 }

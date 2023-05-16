@@ -1,6 +1,6 @@
 package pers.chris.base.task;
 
-import pers.chris.base.datatype.Context;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -20,7 +20,9 @@ public class SingleTaskInstance<Input, Output> extends BaseTaskInstance<Input, O
     @Override
     public void run() {
         Input input = (Input) context.get();
+
         Output output = taskDefinition.execute(input);
+
         context.set(output);
     }
 }

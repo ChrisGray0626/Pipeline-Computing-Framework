@@ -1,6 +1,7 @@
 package pers.chris.base.writer;
 
 import pers.chris.base.Configuration;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -14,7 +15,7 @@ public class ConsoleWriter extends BaseWriter{
         configuration.set(Configuration.Constant.WRITER_TYPE, Configuration.Constant.WriterType.CONSOLE);
     }
     @Override
-    public void write(Object data) {
-        System.out.println(data);
+    public void write(Context context) {
+        System.out.println(context.get());
     }
 }

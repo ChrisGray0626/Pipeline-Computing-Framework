@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import pers.chris.base.Configuration;
+import pers.chris.base.context.Context;
 
 /**
  * @Description
@@ -21,7 +22,7 @@ public class FileReader extends BaseReader {
 
 
     @Override
-    public Object read() {
+    public void read(Context context) {
         Path path = Paths.get(configuration.get(Configuration.Constant.INPUT_PATH));
         byte[] bytes;
         try {
@@ -29,6 +30,6 @@ public class FileReader extends BaseReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new String(bytes);
+        context.set(new String(bytes));
     }
 }

@@ -1,13 +1,9 @@
 package pers.chris.base.task;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import pers.chris.base.util.ReflectUtil;
 import pers.chris.base.context.Context;
+import pers.chris.base.util.ReflectUtil;
 
 /**
  * @Description
@@ -17,9 +13,13 @@ import pers.chris.base.context.Context;
 @SuppressWarnings("rawtypes")
 public class TaskManager {
 
-    private final Map<String, BaseTaskDefinition> taskDefinitions;
     private static TaskManager instance;
+    private final Map<String, BaseTaskDefinition> taskDefinitions;
 
+
+    private TaskManager() {
+        taskDefinitions = new ConcurrentHashMap<>();
+    }
 
     public static TaskManager getInstance() {
         if (instance == null) {
@@ -28,18 +28,9 @@ public class TaskManager {
         return instance;
     }
 
-    private TaskManager() {
-        taskDefinitions = new ConcurrentHashMap<>();
-    }
-
     public <Input, Output> void addTask(String taskDefinitionClassName, Context context) {
         BaseTaskDefinition<Input, Output> taskDefinition = getTaskDefinition(taskDefinitionClassName);
         execute(taskDefinition, context);
-    }
-
-    public final <Input, Output>void execute(BaseTaskDefinition<Input, Output> taskDefinition, Context context) {
-        BaseTaskInstance<Input, Output> taskInstance = BaseTaskInstance.getInstance(taskDefinition, context);
-        taskInstance.run();
     }
 
     @SuppressWarnings("unchecked")
@@ -50,5 +41,10 @@ public class TaskManager {
         }
 
         return (BaseTaskDefinition<Input, Output>) taskDefinitions.get(taskDefinitionClassName);
+    }
+
+    public final <Input, Output> void execute(BaseTaskDefinition<Input, Output> taskDefinition, Context context) {
+        BaseTaskInstance<Input, Output> taskInstance = BaseTaskInstance.getInstance(taskDefinition, context);
+        taskInstance.run();
     }
 }

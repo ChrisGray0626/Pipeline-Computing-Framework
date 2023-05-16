@@ -1,7 +1,6 @@
 package pers.chris.base.task;
 
 import java.util.List;
-import org.apache.spark.internal.config.R;
 import pers.chris.base.Configuration;
 
 /**
@@ -9,7 +8,7 @@ import pers.chris.base.Configuration;
  * @Author Chris
  * @Date 2023/5/13
  */
-public abstract class BaseParallelTaskDefinition<Input, Output> extends BaseTaskDefinition<Input, Output>{
+public abstract class BaseParallelTaskDefinition<Input, Output> extends BaseTaskDefinition<Input, Output> {
 
     public BaseParallelTaskDefinition() {
         super();

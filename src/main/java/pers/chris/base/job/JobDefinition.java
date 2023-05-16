@@ -1,13 +1,10 @@
 package pers.chris.base.job;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
-import pers.chris.base.Configuration;
 import pers.chris.base.reader.BaseReader;
-import pers.chris.base.task.BaseTaskDefinition;
 import pers.chris.base.writer.BaseWriter;
 
 /**
@@ -18,9 +15,9 @@ import pers.chris.base.writer.BaseWriter;
 @Getter
 public class JobDefinition {
 
+    private final List<String> taskClassNames;
     private String id;
     private String name;
-    private final List<String> taskClassNames;
     // TODO Reader and Writer
     private BaseReader reader;
     private BaseWriter writer;

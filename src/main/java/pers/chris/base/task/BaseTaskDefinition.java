@@ -11,19 +11,19 @@ import pers.chris.base.job.JobDefinition;
 
 public abstract class BaseTaskDefinition<Input, Output> {
 
+    private static final String DEFAULT_TASK_TYPE = Configuration.Constant.TaskType.SINGLE;
     protected String taskId;
     protected JobDefinition jobDefinition;
     protected Configuration configuration;
-    private static final String DEFAULT_TASK_TYPE = Configuration.Constant.TaskType.SINGLE;
 
     protected BaseTaskDefinition() {
         configuration = Configuration.getInstance();
         setTaskType(DEFAULT_TASK_TYPE);
     }
 
-    public abstract Output execute(Input input);
-
     protected void setTaskType(String taskType) {
         configuration.set(Configuration.Constant.TASK_TYPE, taskType);
     }
+
+    public abstract Output execute(Input input);
 }

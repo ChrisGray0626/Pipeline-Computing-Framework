@@ -2,7 +2,6 @@ package pers.chris.base.sample;
 
 
 import pers.chris.base.job.JobDefinition;
-import pers.chris.base.job.JobManager;
 import pers.chris.base.reader.FileReader;
 import pers.chris.base.writer.ConsoleWriter;
 

@@ -12,15 +12,6 @@ public class ReflectUtil {
     private ReflectUtil() {
     }
 
-    public static <T> T newInstance(Class<T> clazz) {
-        try {
-            return clazz.getDeclaredConstructor().newInstance();
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static <T> T newInstance(String className) {
         Class<T> clazz = newClass(className);
         return newInstance(clazz);
@@ -35,5 +26,14 @@ public class ReflectUtil {
             throw new RuntimeException(e);
         }
         return clazz;
+    }
+
+    public static <T> T newInstance(Class<T> clazz) {
+        try {
+            return clazz.getDeclaredConstructor().newInstance();
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

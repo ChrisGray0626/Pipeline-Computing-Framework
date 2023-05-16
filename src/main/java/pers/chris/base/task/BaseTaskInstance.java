@@ -19,8 +19,7 @@ public abstract class BaseTaskInstance<Input, Output> extends Thread {
             BaseTaskDefinition<Input, Output> taskDefinition, Context context) {
         if (taskDefinition instanceof BaseParallelTaskDefinition) {
             return new ParallelTaskInstance<>((BaseParallelTaskDefinition<Input, Output>) taskDefinition, context);
-        }
-        else {
+        } else {
             return new SingleTaskInstance<>(taskDefinition, context);
         }
     }

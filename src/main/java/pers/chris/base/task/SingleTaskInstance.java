@@ -7,7 +7,7 @@ import pers.chris.base.context.Context;
  * @Author Chris
  * @Date 2023/5/14
  */
-public class SingleTaskInstance<Input, Output> extends BaseTaskInstance<Input, Output>{
+public class SingleTaskInstance<Input, Output> extends BaseTaskInstance<Input, Output> {
 
     private final BaseTaskDefinition<Input, Output> taskDefinition;
 

@@ -12,7 +12,7 @@ import pers.chris.base.context.Context;
  * @Author Chris
  * @Date 2023/5/14
  */
-public class ParallelTaskInstance<Input, Output> extends BaseTaskInstance<Input, Output>{
+public class ParallelTaskInstance<Input, Output> extends BaseTaskInstance<Input, Output> {
 
     private final BaseParallelTaskDefinition<Input, Output> taskDefinition;
 
